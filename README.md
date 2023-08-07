@@ -1,6 +1,6 @@
 # config
 
-Reads a configuration file into a configuration struct.
+Looks for a configuration file in various formats and reads it into a configuration object.
 
 Uses [prantlf.json] and [prantlf.yaml]. Can be combined with [prantlf.cargs] to override selected options from the command-line.
 
