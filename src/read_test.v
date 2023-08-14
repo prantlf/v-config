@@ -7,6 +7,11 @@ mut:
 	test int
 }
 
+fn test_read_ini() {
+	test := read_config[Test]('src/testdata/config.ini')!
+	assert test.test == 42
+}
+
 // pub fn (mut t Test) from_toml(any toml.Any) {
 // 	mp := any.as_map()
 // 	t.test = (mp['test'] or { '0' }).int()

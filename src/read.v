@@ -2,20 +2,30 @@ module config
 
 import os
 // import toml
-import prantlf.jany { UnmarshalOpts }
-import prantlf.json { unmarshal }
+import prantlf.ini { ReadableIni }
+import prantlf.jany
+import prantlf.json
 import prantlf.path { extname }
-import prantlf.yaml { unmarshal_file }
+import prantlf.yaml
 
 pub fn read_config[T](file string) !&T {
 	d.log('read configuration from "%s"', file)
 	ext := extname(file).to_lower()
 	match ext {
+		'.ini', '.properties' {
+			d.log('reading file "%s"', file)
+			contents := os.read_file(file)!
+			d.log('unmarshal ini file "%s"', file)
+			i := ReadableIni.parse(contents)!
+			cfg := ini.decode[T, ReadableIni](i)!
+			// cfg := ini.unmarshal[T](contents)!
+			return &cfg
+		}
 		'.json' {
 			d.log('reading file "%s"', file)
 			contents := os.read_file(file)!
 			d.log('unmarshal json file "%s"', file)
-			cfg := unmarshal[T](contents, json.UnmarshalOpts{
+			cfg := json.unmarshal[T](contents, json.UnmarshalOpts{
 				ignore_comments: true
 				ignore_trailing_commas: true
 				allow_single_quotes: true
@@ -30,7 +40,7 @@ pub fn read_config[T](file string) !&T {
 		// }
 		'.yml', '.yaml' {
 			d.log('unmarshal yaml file "%s"', file)
-			cfg := unmarshal_file[T](file, UnmarshalOpts{})!
+			cfg := yaml.unmarshal_file[T](file, jany.UnmarshalOpts{})!
 			return &cfg
 		}
 		else {

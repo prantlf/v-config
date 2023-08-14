@@ -2,7 +2,7 @@
 
 Looks for a configuration file in various formats and reads it into a configuration object.
 
-Uses [prantlf.json] and [prantlf.yaml]. Can be combined with [prantlf.cargs] to override selected options from the command-line.
+Uses [prantlf.ini], [prantlf.json] and [prantlf.yaml]. Can be combined with [prantlf.cargs] to override selected options from the command-line.
 
 ## Synopsis
 
@@ -13,6 +13,8 @@ import prantlf.cargs { Input, parse_to }
 import prantlf.config { find_config_file, read_config }
 
 mut opts := if config_file := find_config_file('.', [
+  '.newchanges.ini',
+  '.newchanges.properties',
   '.newchanges.json',
   '.newchanges.yml',
   '.newchanges.yaml',
@@ -45,6 +47,8 @@ Files and directories will be matched with the specified names in ghe order of t
 
 ```go
 config_file := find_config_file('.', [
+  '.newchanges.ini',
+  '.newchanges.properties',
   '.newchanges.json',
   '.newchanges.yml',
   '.newchanges.yaml',
@@ -55,11 +59,13 @@ config_file := find_config_file('.', [
 
 Reads the file and deserialises its content from the format assumed by the file extension to the specified generic struct.
 
-| Extension | Format                 |
-|:----------|:-----------------------|
-| `.json`   | [JSON]/[JSONC]/[JSON5] |
-| `.yml`    | [YAML]                 |
-| `.yaml`   | [YAML]                 |
+| Extension     | Format                 |
+|:--------------|:-----------------------|
+| `.ini`        | [INI]                  |
+| `.properties` | [INI]                  |
+| `.json`       | [JSON]/[JSONC]/[JSON5] |
+| `.yml`        | [YAML]                 |
+| `.yaml`       | [YAML]                 |
 
 ```go
 opts := read_config[Opts]('~/.newchanges.json')!
@@ -76,10 +82,12 @@ Copyright (c) 2023 Ferdinand Prantl
 Licensed under the MIT license.
 
 [VPM]: https://vpm.vlang.io/packages/prantlf.config
+[INI]: https://en.wikipedia.org/wiki/INI_file#Example
 [JSON]: https://www.json.org/
 [JSONC]: https://changelog.com/news/jsonc-is-a-superset-of-json-which-supports-comments-6LwR
 [JSON5]: https://spec.json5.org/
 [YAML]: https://yaml.org/
 [prantlf.cargs]: https://github/com//prantlf/v-cargs
+[prantlf.ini]: https://github.com/prantlf/v-ini
 [prantlf.json]: https://github.com/prantlf/v-json
 [prantlf.yaml]: https://github.com/prantlf/v-yaml
