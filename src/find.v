@@ -8,7 +8,8 @@ const d = new_debug('config')
 pub fn find_config_file(start_dir string, names []string, depth int, user bool) ?string {
 	if config.d.is_enabled() {
 		names_str := names.join('"", "')
-		config.d.log_str('look for names "${names_str}" in "${start_dir}"')
+		dstart_dir := config.d.rwd(start_dir)
+		config.d.log_str('look for names "${names_str}" in "${dstart_dir}"')
 	}
 
 	mut dir := os.real_path(start_dir)
@@ -20,14 +21,35 @@ pub fn find_config_file(start_dir string, names []string, depth int, user bool) 
 		dir = os.join_path_single(dir, '..')
 	}
 
-	if home_dir := get_home_dir() {
-		file := find_file(home_dir, names)
-		if file.len > 0 {
-			return normalise_file(file)
+	if user {
+		if home_dir := get_home_dir() {
+			file := find_file(home_dir, names)
+			if file.len > 0 {
+				return normalise_file(file)
+			}
 		}
 	}
 
 	config.d.log_str('none of the names found')
+	return none
+}
+
+pub fn find_user_config_file(names []string) ?string {
+	if home_dir := get_home_dir() {
+		if config.d.is_enabled() {
+			names_str := names.join('"", "')
+			dhome_dir := config.d.rwd(home_dir)
+			config.d.log_str('look for names "${names_str}" in "${dhome_dir}"')
+		}
+
+		file := find_file(home_dir, names)
+		if file.len > 0 {
+			return normalise_file(file)
+		}
+
+		config.d.log_str('none of the names found')
+	}
+
 	return none
 }
 
@@ -56,5 +78,12 @@ fn get_home_dir() ?string {
 	} $else {
 		'HOME'
 	}
-	return os.getenv_opt(var_name)
+	return if home_dir := os.getenv_opt(var_name) {
+		dhome_dir := config.d.rwd(home_dir)
+		config.d.log('environment variable "%s" poins to "%s"', var_name, dhome_dir)
+		home_dir
+	} else {
+		config.d.log('environment variable "%s" is empty', var_name)
+		none
+	}
 }

@@ -14,8 +14,13 @@ fn test_find_missing_local() {
 	assert file == none
 }
 
-fn test_find_missing_home() {
+fn test_find_missing_home_1() {
 	file := find_config_file('.', ['dummy'], 0, true)
+	assert file == none
+}
+
+fn test_find_missing_home_2() {
+	file := find_user_config_file(['dummy'])
 	assert file == none
 }
 
@@ -37,7 +42,12 @@ fn test_find_upwards() {
 	assert actual? == expected
 }
 
-fn test_find_home() {
+fn test_find_home_1() {
 	dir := find_config_file('.', ['.vmodules'], 0, true)
+	assert dir?.len > 0
+}
+
+fn test_find_home_2() {
+	dir := find_user_config_file(['.vmodules'])
 	assert dir?.len > 0
 }

@@ -7,5 +7,8 @@ check:
 test:
 	v test .
 
+clean:
+	rm -rf src/*_test src/*.dSYM
+
 version:
 	npx conventional-changelog-cli -p angular -i CHANGELOG.md -s

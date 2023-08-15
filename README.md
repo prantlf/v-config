@@ -43,7 +43,7 @@ The following functions are exported:
 
 Searches for files or directories with the specified names. The search starts in the directory `start_dir` and continues to a parent directory as many times as is the number `depth`. The dept 0 means searching only the directory `start_dir`. If the flg `user` is true, it will look to the home directory of the current user too.
 
-Files and directories will be matched with the specified names in ghe order of the names in the array. The first one matching will cause the method return the absolute path to the found file. If no file or directory with the specified names can be found, `none` will be returned.
+Files and directories will be matched with the specified names in the order of the names in the array. The first one matching will cause the method return the absolute path to the found file. If no file or directory with the specified names can be found, `none` will be returned.
 
 ```go
 config_file := find_config_file('.', [
@@ -55,9 +55,25 @@ config_file := find_config_file('.', [
 ], 10, true)
 ```
 
+### find_user_config_file(names []string) ?string
+
+Searches for files or directories with the specified names in the home directory of the current user.
+
+Files and directories will be matched with the specified names in the order of the names in the array. The first one matching will cause the method return the absolute path to the found file. If no file or directory with the specified names can be found, `none` will be returned.
+
+```go
+config_file := find_user_config_file([
+  '.newchanges.ini',
+  '.newchanges.properties',
+  '.newchanges.json',
+  '.newchanges.yml',
+  '.newchanges.yaml',
+])
+```
+
 ### read_config[T](file string) !T
 
-Reads the file and deserialises its content from the format assumed by the file extension to the specified generic struct.
+Reads the file and deserialises its contents from the format assumed by the file extension to a new object.
 
 | Extension     | Format                 |
 |:--------------|:-----------------------|
@@ -69,6 +85,23 @@ Reads the file and deserialises its content from the format assumed by the file 
 
 ```go
 opts := read_config[Opts]('~/.newchanges.json')!
+```
+
+### read_config_to[T](file string, mut cfg T) !
+
+Reads the file and deserialises its contents from the format assumed by the file extension to an existing object.
+
+| Extension     | Format                 |
+|:--------------|:-----------------------|
+| `.ini`        | [INI]                  |
+| `.properties` | [INI]                  |
+| `.json`       | [JSON]/[JSONC]/[JSON5] |
+| `.yml`        | [YAML]                 |
+| `.yaml`       | [YAML]                 |
+
+```go
+mut opts := Opts{}
+opts := read_config_to('~/.newchanges.json', mut opts)!
 ```
 
 ## Contributing
