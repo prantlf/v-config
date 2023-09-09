@@ -55,6 +55,14 @@ config_file := find_config_file('.', [
 ], 10, true)
 ```
 
+### find_config_file_any(start_dir string, name string, depth int, user bool) ?string
+
+Simplifies calls to the previous function if you accept all of the configuration files extensions.
+
+```go
+config_file := find_config_file('.', '.newchanges', 10, true)
+```
+
 ### find_user_config_file(names []string) ?string
 
 Searches for files or directories with the specified names in the home directory of the current user.
@@ -69,6 +77,14 @@ config_file := find_user_config_file([
   '.newchanges.yml',
   '.newchanges.yaml',
 ])
+```
+
+### find_user_config_file_any(name string) ?string
+
+Simplifies calls to the previous function if you accept all of the configuration files extensions.
+
+```go
+config_file := find_user_config_file_any('.newchanges')
 ```
 
 ### read_config[T](file string) !T

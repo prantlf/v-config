@@ -5,6 +5,19 @@ import prantlf.debug { new_debug }
 
 const d = new_debug('config')
 
+const exts = [
+	'.ini',
+	'.properties',
+	'.json',
+	'.yml',
+	'.yaml',
+]
+
+pub fn find_config_file_any(start_dir string, name string, depth int, user bool) ?string {
+	names := get_all_names(name)
+	return find_config_file(start_dir, names, depth, user)
+}
+
 pub fn find_config_file(start_dir string, names []string, depth int, user bool) ?string {
 	if config.d.is_enabled() {
 		names_str := names.join('"", "')
@@ -32,6 +45,11 @@ pub fn find_config_file(start_dir string, names []string, depth int, user bool) 
 
 	config.d.log_str('none of the names found')
 	return none
+}
+
+pub fn find_user_config_file_any(name string) ?string {
+	names := get_all_names(name)
+	return find_user_config_file(names)
 }
 
 pub fn find_user_config_file(names []string) ?string {
@@ -86,4 +104,12 @@ fn get_home_dir() ?string {
 		config.d.log('environment variable "%s" is empty', var_name)
 		none
 	}
+}
+
+fn get_all_names(name string) []string {
+	mut names := []string{len: config.exts.len}
+	for i in 0 .. config.exts.len {
+		names[i] = '${name}${config.exts[i]}'
+	}
+	return names
 }
