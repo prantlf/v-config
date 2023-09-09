@@ -1,5 +1,11 @@
 # Changes
 
+## [0.3.0](https://github.com/prantlf/v-config/compare/v0.2.0...v0.3.0) (2023-09-09)
+
+### Features
+
+* Find config files with any supported extension ([8eccfc7](https://github.com/prantlf/v-config/commit/8eccfc71628da397042bd410b129571fe211b08d))
+
 ## [0.2.0](https://github.com/prantlf/v-config/compare/v0.1.0...v0.2.0) (2023-08-15)
 
 ### Features
