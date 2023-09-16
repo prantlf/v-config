@@ -11,7 +11,7 @@ const exts = [
 	'.json',
 	'.yml',
 	'.yaml',
-]
+]!
 
 pub fn find_config_file_any(start_dir string, name string, depth int, user bool) ?string {
 	names := get_all_names(name)
