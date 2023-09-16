@@ -1,6 +1,6 @@
 module config
 
-import os
+import os { exists, getenv_opt, join_path_single, real_path }
 import prantlf.debug { new_debug }
 
 const d = new_debug('config')
@@ -25,13 +25,13 @@ pub fn find_config_file(start_dir string, names []string, depth int, user bool) 
 		config.d.log_str('look for names "${names_str}" in "${dstart_dir}"')
 	}
 
-	mut dir := os.real_path(start_dir)
+	mut dir := real_path(start_dir)
 	for _ in -1 .. depth {
 		file := find_file(dir, names)
 		if file.len > 0 {
 			return normalise_file(file)
 		}
-		dir = os.join_path_single(dir, '..')
+		dir = join_path_single(dir, '..')
 	}
 
 	if user {
@@ -72,7 +72,7 @@ pub fn find_user_config_file(names []string) ?string {
 }
 
 fn normalise_file(path string) string {
-	file := os.real_path(path)
+	file := real_path(path)
 	dfile := config.d.rwd(file)
 	config.d.log('found "%s"', dfile)
 	return file
@@ -80,10 +80,10 @@ fn normalise_file(path string) string {
 
 fn find_file(dir string, names []string) string {
 	for name in names {
-		mut file := os.join_path_single(dir, name)
+		mut file := join_path_single(dir, name)
 		mut ddir := config.d.rwd(dir)
 		config.d.log('checking if "%s" exists in "%s"', name, ddir)
-		if os.exists(file) {
+		if exists(file) {
 			return file
 		}
 	}
@@ -96,7 +96,7 @@ fn get_home_dir() ?string {
 	} $else {
 		'HOME'
 	}
-	return if home_dir := os.getenv_opt(var_name) {
+	return if home_dir := getenv_opt(var_name) {
 		dhome_dir := config.d.rwd(home_dir)
 		config.d.log('environment variable "%s" poins to "%s"', var_name, dhome_dir)
 		home_dir

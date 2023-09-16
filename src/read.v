@@ -1,6 +1,6 @@
 module config
 
-import os
+import os { read_file }
 // import toml
 import prantlf.ini
 import prantlf.jany
@@ -20,13 +20,13 @@ pub fn read_config_to[T](file string, mut cfg T) ! {
 	match ext {
 		'.ini', '.properties' {
 			d.log('reading file "%s"', file)
-			contents := os.read_file(file)!
+			contents := read_file(file)!
 			d.log('unmarshal ini file "%s"', file)
 			ini.unmarshal_to[T](contents, mut cfg)!
 		}
 		'.json' {
 			d.log('reading file "%s"', file)
-			contents := os.read_file(file)!
+			contents := read_file(file)!
 			d.log('unmarshal json file "%s"', file)
 			json.unmarshal_to[T](contents, mut cfg, json.UnmarshalOpts{
 				ignore_comments: true
@@ -36,7 +36,7 @@ pub fn read_config_to[T](file string, mut cfg T) ! {
 		}
 		// '.toml' {
 		// 	d.log('reading file "%s"', file)
-		// 	contents := os.read_file(file)!
+		// 	contents := read_file(file)!
 		// 	d.log('unmarshal toml file "%s"', file)
 		// 	return toml.decode[T](contents)!
 		// }
