@@ -136,6 +136,7 @@ Reads the file and deserialises its contents from the format assumed by the file
 mut opts := Opts{}
 opts := read_config_to('~/.newchanges.json', mut opts)!
 ```
+
 ### Errors
 
 If parsing the configuration file fails because of an invalid syntax, a more descriptive message can be printed than the default, single-line one.
