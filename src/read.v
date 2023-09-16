@@ -22,9 +22,7 @@ pub fn read_config_to[T](file string, mut cfg T) ! {
 			d.log('reading file "%s"', file)
 			contents := os.read_file(file)!
 			d.log('unmarshal ini file "%s"', file)
-			i := ini.parse_readable(contents)!
-			ini.decode_readable_to[T](i, mut cfg)!
-			// ini.unmarshal_to[T](contents, mut cfg)!
+			ini.unmarshal_to[T](contents, mut cfg)!
 		}
 		'.json' {
 			d.log('reading file "%s"', file)
