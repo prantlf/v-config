@@ -5,7 +5,7 @@ check:
 	v vet .
 
 test:
-	v test .
+	NO_COLOR=1 v test .
 
 clean:
 	rm -rf src/*_test src/*.dSYM

@@ -6,11 +6,28 @@ Uses [prantlf.ini], [prantlf.json] and [prantlf.yaml]. Can be combined with [pra
 
 ## Synopsis
 
+Declare a structure for the configuration and read its contents from the first file found with any supported file extension:
+
+```go
+import prantlf.config { find_config_file, read_config }
+
+struct Config { ... }
+
+config := if config_file := find_config_file_any('.', '.newchanges', 10, true) {
+  read_config[Config](config_file)!
+} else {
+  &Config{}
+}
+```
+
 Specify usage description and version of the command-line tool. Declare a structure with all command-line options. Import the command-line parser and parse the options and arguments:
 
 ```go
 import prantlf.cargs { Input, parse_to }
 import prantlf.config { find_config_file, read_config }
+
+const usage = '...'
+struct Opts { ... }
 
 mut opts := if config_file := find_config_file('.', [
   '.newchanges.ini',
@@ -60,7 +77,7 @@ config_file := find_config_file('.', [
 Simplifies calls to the previous function if you accept all of the configuration files extensions.
 
 ```go
-config_file := find_config_file('.', '.newchanges', 10, true)
+config_file := find_config_file_any('.', '.newchanges', 10, true)
 ```
 
 ### find_user_config_file(names []string) ?string
@@ -119,6 +136,37 @@ Reads the file and deserialises its contents from the format assumed by the file
 mut opts := Opts{}
 opts := read_config_to('~/.newchanges.json', mut opts)!
 ```
+### Errors
+
+If parsing the configuration file fails because of an invalid syntax, a more descriptive message can be printed than the default, single-line one.
+
+```go
+import prantlf.config { read_config, error_msg_full }
+
+struct Config { ... }
+
+if config := read_config[Config]('.newchanges.ini') {
+  ...
+} else {
+  eprintln(error_msg_full(err))
+}
+```
+
+For example, parsing the following contents:
+
+    answer=42
+    question
+
+will return the following short message by `err.msg()`:
+
+    unexpected end encountered when parsing a property name on line 2, column 9
+
+and the following long and colourful message by `error_msg_full()`:
+
+		unexpected end encountered when parsing a property name:
+     1 | answer=42
+     2 | question
+       |         ^
 
 ## Contributing
 
