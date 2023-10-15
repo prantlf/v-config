@@ -14,6 +14,17 @@ fn testsuite_begin() {
 	}
 }
 
+fn test_write_ini() {
+	file := '${config.outdir}/config.ini'
+	if exists(file) {
+		rm(file)!
+	}
+	write_config(file, Test{})!
+	contents := read_file(file)!
+	assert contents == 'test = 42
+'
+}
+
 fn test_write_json() {
 	file := '${config.outdir}/config.json'
 	if exists(file) {
