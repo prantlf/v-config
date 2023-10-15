@@ -7,8 +7,10 @@ mut:
 	test int
 }
 
+const datadir = 'src/testdata'
+
 fn test_read_ini() {
-	test := read_config[Test]('src/testdata/config.ini')!
+	test := read_config[Test]('${config.datadir}/config.ini')!
 	assert test.test == 42
 }
 
@@ -18,21 +20,21 @@ fn test_read_ini() {
 // }
 
 fn test_read_json() {
-	test := read_config[Test]('src/testdata/config.json')!
+	test := read_config[Test]('${config.datadir}/config.json')!
 	assert test.test == 42
 }
 
 // fn test_read_toml() {
-// 	test := read_config[Test]('src/testdata/config.toml')!
+// 	test := read_config[Test]('${datadir}/config.toml')!
 // 	assert test.test == 42
 // }
 
 fn test_read_yml() {
-	test := read_config[Test]('src/testdata/config.yml')!
+	test := read_config[Test]('${config.datadir}/config.yml')!
 	assert test.test == 42
 }
 
 fn test_read_yaml() {
-	test := read_config[Test]('src/testdata/config.yaml')!
+	test := read_config[Test]('${config.datadir}/config.yaml')!
 	assert test.test == 42
 }
