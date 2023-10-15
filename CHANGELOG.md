@@ -1,5 +1,12 @@
 # Changes
 
+## [0.5.0](https://github.com/prantlf/v-config/compare/v0.4.0...v0.5.0) (2023-10-15)
+
+### Features
+
+* Support writing the configuration to a json file ([770700e](https://github.com/prantlf/v-config/commit/770700eb35f0310cdbe027705ff6821440cbc9cf))
+* Support writing the configuration to an ini file ([d7628d1](https://github.com/prantlf/v-config/commit/d7628d18adcae6948916c9c2cafff427c3c899b1))
+
 ## [0.4.0](https://github.com/prantlf/v-config/compare/v0.3.0...v0.4.0) (2023-09-16)
 
 ### Features
