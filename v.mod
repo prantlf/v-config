@@ -5,6 +5,6 @@ Module {
 	license: 'MIT'
 	dependencies: [
 		'prantlf.debug', 'prantlf.ini', 'prantlf.jany', 'prantlf.json',
-		'prantlf.path', 'prantlf.yaml'
+		'prantlf.osutil', 'prantlf.path', 'prantlf.yaml'
 	]
 }
