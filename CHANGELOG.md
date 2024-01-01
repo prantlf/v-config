@@ -1,5 +1,11 @@
 # Changes
 
+## [0.5.1](https://github.com/prantlf/v-config/compare/v0.5.0...v0.5.1) (2024-01-01)
+
+### Bug Fixes
+
+* Adapt to changes on interface of json and yaml packages ([1a1b33f](https://github.com/prantlf/v-config/commit/1a1b33fdd855ab639832a6443174eb0e53f8b0fc))
+
 ## [0.5.0](https://github.com/prantlf/v-config/compare/v0.4.0...v0.5.0) (2023-10-15)
 
 ### Features
