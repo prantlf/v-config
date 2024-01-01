@@ -52,6 +52,7 @@ jobs:
         git clone --depth=1 --recursive --shallow-submodules https://github.com/prantlf/v-json src\modules\prantlf\json
         git clone --depth=1 --recursive --shallow-submodules https://github.com/prantlf/v-path src\modules\prantlf\path
         git clone --depth=1 --recursive --shallow-submodules https://github.com/prantlf/v-strutil src\modules\prantlf\strutil
+        git clone --depth=1 --recursive --shallow-submodules https://github.com/prantlf/v-osutil src\modules\prantlf\osutil
         git clone --depth=1 --recursive --shallow-submodules https://github.com/prantlf/v-yaml src\modules\prantlf\yaml
     - name: Test
       run: cmd /c make.bat
