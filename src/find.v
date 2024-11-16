@@ -48,9 +48,9 @@ pub fn find_user_config_file(names []string) ?string {
 }
 
 fn get_all_names(name string) []string {
-	mut names := []string{len: config.exts.len}
-	for i in 0 .. config.exts.len {
-		names[i] = '${name}${config.exts[i]}'
+	mut names := []string{len: exts.len}
+	for i in 0 .. exts.len {
+		names[i] = '${name}${exts[i]}'
 	}
 	return names
 }

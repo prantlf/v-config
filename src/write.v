@@ -19,7 +19,7 @@ pub fn write_config[T](file string, cfg &T) ! {
 			d.log_str('marshal json')
 			contents := json.marshal_opt[T](cfg, &json.MarshalOpts{
 				enums_as_names: true
-				pretty: true
+				pretty:         true
 			})
 			d.log_str('write file')
 			write_file(file, contents)!

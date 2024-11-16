@@ -10,7 +10,7 @@ mut:
 const datadir = 'src/testdata'
 
 fn test_read_ini() {
-	test := read_config[Test]('${config.datadir}/config.ini')!
+	test := read_config[Test]('${datadir}/config.ini')!
 	assert test.test == 42
 }
 
@@ -20,7 +20,7 @@ fn test_read_ini() {
 // }
 
 fn test_read_json() {
-	test := read_config[Test]('${config.datadir}/config.json')!
+	test := read_config[Test]('${datadir}/config.json')!
 	assert test.test == 42
 }
 
@@ -30,11 +30,11 @@ fn test_read_json() {
 // }
 
 fn test_read_yml() {
-	test := read_config[Test]('${config.datadir}/config.yml')!
+	test := read_config[Test]('${datadir}/config.yml')!
 	assert test.test == 42
 }
 
 fn test_read_yaml() {
-	test := read_config[Test]('${config.datadir}/config.yaml')!
+	test := read_config[Test]('${datadir}/config.yaml')!
 	assert test.test == 42
 }

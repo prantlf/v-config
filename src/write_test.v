@@ -9,13 +9,13 @@ struct Test {
 const outdir = 'src/testout'
 
 fn testsuite_begin() {
-	if !exists(config.outdir) {
-		mkdir(config.outdir)!
+	if !exists(outdir) {
+		mkdir(outdir)!
 	}
 }
 
 fn test_write_ini() {
-	file := '${config.outdir}/config.ini'
+	file := '${outdir}/config.ini'
 	if exists(file) {
 		rm(file)!
 	}
@@ -26,7 +26,7 @@ fn test_write_ini() {
 }
 
 fn test_write_json() {
-	file := '${config.outdir}/config.json'
+	file := '${outdir}/config.json'
 	if exists(file) {
 		rm(file)!
 	}

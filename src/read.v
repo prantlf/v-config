@@ -17,23 +17,23 @@ pub fn read_config[T](file string) !&T {
 }
 
 pub fn read_config_to[T](file string, mut cfg T) ! {
-	config.d.log('read configuration from "%s"', file)
+	d.log('read configuration from "%s"', file)
 	ext := extname(file).to_lower()
 	match ext {
 		'.ini', '.properties' {
-			config.d.log_str('read file')
+			d.log_str('read file')
 			contents := read_file(file)!
-			config.d.log_str('unmarshal ini')
+			d.log_str('unmarshal ini')
 			ini.unmarshal_to[T](contents, mut cfg)!
 		}
 		'.json' {
-			config.d.log_str('read file')
+			d.log_str('read file')
 			contents := read_file(file)!
-			config.d.log_str('unmarshal json')
+			d.log_str('unmarshal json')
 			json.unmarshal_opt_to[T](contents, mut cfg, &json.UnmarshalOpts{
-				ignore_comments: true
+				ignore_comments:        true
 				ignore_trailing_commas: true
-				allow_single_quotes: true
+				allow_single_quotes:    true
 			})!
 		}
 		// '.toml' {
@@ -43,7 +43,7 @@ pub fn read_config_to[T](file string, mut cfg T) ! {
 		// 	return toml.decode[T](contents)!
 		// }
 		'.yml', '.yaml' {
-			config.d.log_str('unmarshal yaml file')
+			d.log_str('unmarshal yaml file')
 			yaml.unmarshal_file_to[T](file, mut cfg)!
 		}
 		else {

@@ -26,19 +26,19 @@ fn test_find_missing_home_2() {
 
 fn test_find_local() {
 	actual := find_config_file('.', ['v.mod'], 0, false)
-	expected := os.join_path_single(config.wd, 'v.mod')
+	expected := os.join_path_single(wd, 'v.mod')
 	assert actual? == expected
 }
 
 fn test_find_second() {
 	actual := find_config_file('.', ['dummy', '.git'], 0, false)
-	expected := os.join_path_single(config.wd, '.git')
+	expected := os.join_path_single(wd, '.git')
 	assert actual? == expected
 }
 
 fn test_find_upwards() {
 	actual := find_config_file('src', ['v.mod'], 1, false)
-	expected := os.join_path_single(config.wd, 'v.mod')
+	expected := os.join_path_single(wd, 'v.mod')
 	assert actual? == expected
 }
 
