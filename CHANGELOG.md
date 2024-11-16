@@ -1,5 +1,11 @@
 # Changes
 
+## [0.5.2](https://github.com/prantlf/v-config/compare/v0.5.1...v0.5.2) (2024-11-16)
+
+### Bug Fixes
+
+* Fix sources for the new V compiler ([f1fc52a](https://github.com/prantlf/v-config/commit/f1fc52a43bd9db0dddb1f633864244c718beee08))
+
 ## [0.5.1](https://github.com/prantlf/v-config/compare/v0.5.0...v0.5.1) (2024-01-01)
 
 ### Bug Fixes
