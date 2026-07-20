@@ -1,7 +1,7 @@
 Module {
 	name: 'config'
 	description: 'Looks for a configuration file in various formats and reads it into a configuration object.'
-	version: '0.5.2'
+	version: '0.6.0'
 	license: 'MIT'
 	dependencies: [
 		'prantlf.debug', 'prantlf.ini', 'prantlf.jany', 'prantlf.json',

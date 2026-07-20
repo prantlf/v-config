@@ -1,5 +1,11 @@
 # Changes
 
+## [0.6.0](https://github.com/prantlf/v-config/compare/v0.5.2...v0.6.0) (2026-07-20)
+
+### Features
+
+* Adapt to breaking changes in V ([b483308](https://github.com/prantlf/v-config/commit/b48330813f0e59b6d27d3eeaa413ee60c7ea2e66))
+
 ## [0.5.2](https://github.com/prantlf/v-config/compare/v0.5.1...v0.5.2) (2024-11-16)
 
 ### Bug Fixes
