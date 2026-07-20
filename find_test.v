@@ -5,12 +5,12 @@ import os
 const wd = os.getwd()
 
 fn test_find_empty() {
-	file := find_config_file('src', [], 0, false)
+	file := find_config_file('testdata', [], 0, false)
 	assert file == none
 }
 
 fn test_find_missing_local() {
-	file := find_config_file('src', ['v.mod'], 0, false)
+	file := find_config_file('testdata', ['v.mod'], 0, false)
 	assert file == none
 }
 
@@ -37,7 +37,7 @@ fn test_find_second() {
 }
 
 fn test_find_upwards() {
-	actual := find_config_file('src', ['v.mod'], 1, false)
+	actual := find_config_file('testdata', ['v.mod'], 1, false)
 	expected := os.join_path_single(wd, 'v.mod')
 	assert actual? == expected
 }

@@ -6,7 +6,7 @@ mut:
 }
 
 fn test_read_ini() {
-	if _ := read_config[Test]('src/testdata/invalid.ini') {
+	if _ := read_config[Test]('testdata/invalid.ini') {
 		assert false
 	} else {
 		assert err.msg() == 'unexpected end encountered when parsing a property name on line 1, column 5'

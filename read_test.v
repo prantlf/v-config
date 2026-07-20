@@ -7,7 +7,7 @@ mut:
 	test int
 }
 
-const datadir = 'src/testdata'
+const datadir = 'testdata'
 
 fn test_read_ini() {
 	test := read_config[Test]('${datadir}/config.ini')!

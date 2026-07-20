@@ -6,7 +6,7 @@ struct Test {
 	test int = 42
 }
 
-const outdir = 'src/testout'
+const outdir = 'testout'
 
 fn testsuite_begin() {
 	if !exists(outdir) {
